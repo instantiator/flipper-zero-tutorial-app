@@ -52,6 +52,7 @@ void test_app_menu_callback_main_menu(void* context, uint32_t index) {
 void test_app_scene_on_enter_main_menu(void* context) {
     TestApp* app = context;
     menu_reset(app->menu);
+    view_set_context(menu_get_view(app->menu), app);
     menu_add_item(
         app->menu,
         "First popup",
@@ -103,6 +104,7 @@ void test_app_scene_on_exit_main_menu(void* context) {
 void test_app_scene_on_enter_popup_one(void* context) {
     TestApp* app = context;
     popup_reset(app->popup);
+    view_set_context(popup_get_view(app->popup), app);
     popup_set_context(app->popup, app);
     popup_set_header(app->popup, "Popup One", 64, 10, AlignCenter, AlignTop);
     popup_set_icon(app->popup, 10, 10, &I_cvc_36x36);
@@ -128,6 +130,7 @@ void test_app_scene_on_exit_popup_one(void* context) {
 void test_app_scene_on_enter_popup_two(void* context) {
     TestApp* app = context;
     popup_reset(app->popup);
+    view_set_context(popup_get_view(app->popup), app);
     popup_set_context(app->popup, app);
     popup_set_header(app->popup, "Popup One", 64, 10, AlignCenter, AlignTop);
     popup_set_icon(app->popup, 10, 10, &I_cvc_36x36);
@@ -213,16 +216,9 @@ void test_app_view_dispatcher_init(TestApp* app) {
 
     // add views to the dispatcher, indexed by their enum value
     FURI_LOG_I(TAG, "test_app_view_dispatcher_init adding view menu");
-    FURI_LOG_I(TAG, "app->view_dispatcher address: %p", app->view_dispatcher);
-    FURI_LOG_I(TAG, "TestAppView_Menu: %d", TestAppView_Menu);
-    FURI_LOG_I(TAG, "menu_get_view(app->menu) address: %p", menu_get_view(app->menu));
     view_dispatcher_add_view(app->view_dispatcher, TestAppView_Menu, menu_get_view(app->menu));
 
     FURI_LOG_I(TAG, "test_app_view_dispatcher_init adding view popup");
-    FURI_LOG_I(TAG, "app->view_dispatcher address: %p", app->view_dispatcher);
-    FURI_LOG_I(TAG, "TestAppView_Popup: %d", TestAppView_Popup);
-    FURI_LOG_I(TAG, "app->popup address: %p", app->popup);
-    FURI_LOG_I(TAG, "popup_get_view(app->popup) address: %p", popup_get_view(app->popup));
     view_dispatcher_add_view(app->view_dispatcher, TestAppView_Popup, popup_get_view(app->popup));
 }
 
