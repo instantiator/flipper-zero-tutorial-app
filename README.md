@@ -2,7 +2,11 @@
 
 This is a simple app for the Flipper Zero, intended to accompany the Flipper Zero developer tutorials at: [instantiator.dev](https://instantiator.dev)
 
-### Supporting references
+## Known issues
+
+- [ ] This code runs on the `release` firmware, but hangs on the `dev` firmware. I'm working on it.
+
+## Supporting references
 
 A lot of the code here is derived from the work I did building the [resistance calculator](https://github.com/instantiator/flipper-zero-experimental-apps/tree/main/resistors) app, and you're welcome to sift through that code and plunder what you need for your own projects.
 
