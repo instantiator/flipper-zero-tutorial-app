@@ -4,7 +4,10 @@ This is a simple app for the Flipper Zero, intended to accompany the Flipper Zer
 
 ## Known issues
 
-- [ ] This code runs on the `release` firmware, but hangs on the `dev` firmware. I'm working on it.
+- [x] This code runs on the `release` firmware, but hangs on the `dev` firmware. I'm working on it.
+  - Issue was twofold:
+    1. I was calling `view_set_context` on each GUI module's views. This is unnecessary, and the various module functions rely on view contexts pointing to the modules. Callback contexts for our callback methods are set using the various module functions (`popup_set_context`, and `menu_add_item`).
+    2. I was providing static icons (a single frame, no framerate) to the menu - which _always_ animates its icons. Having a framerate of zero results in a division by zero error.
 
 ## Supporting references
 
